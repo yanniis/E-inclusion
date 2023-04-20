@@ -39,32 +39,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function recherche() {
     // Sélectionne les éléments HTML 
-    const saisie = document.getElementById("searchInput").value.toUpperCase();
+    const input = document.getElementById("searchInput").value.toUpperCase();
     const table = document.getElementById("table");
-    const lignes = table.getElementsByTagName("tr");
+    const rows = table.getElementsByTagName("tr");
     // Boucle à travers chaque ligne du tableau à partir de la deuxième ligne pour ne pas supprimer l'en-tête 
-    for (let i = 1; i < lignes.length; i++) {
-        // Sélectionne toutes les cellules de la ligne actuelle
-        const cellules = lignes[i].getElementsByTagName("td");
+    for (let i = 1; i < rows.length; i++) {
+        // Sélectionne toutes les cells de la ligne actuelle
+        const cells = rows[i].getElementsByTagName("td");
         // Initialise le booléen pour indiquer l'état de la ligne
-        let ligneTrouvee = false;
+        let trueLine = false;
         // Boucle à travers chaque cellule de la ligne actuelle
-        for (let j = 0; j < cellules.length; j++) {
+        for (let j = 0; j < cells.length; j++) {
             // Sélectionne la cellule actuelle
-            const cellule = cellules[j];
-            if (cellule) {
+            const cell = cells[j];
+            if (cell) {
                 // Récupère le contenu textuel de la cellule en majuscules pour la comparaison
-                const contenu = cellule.textContent.toUpperCase();
+                const contenu = cell.textContent.toUpperCase();
                 // Vérifie si la saisie 
-                if (contenu.includes(saisie)) {
+                if (contenu.includes(input)) {
                     // true = affichage
-                    ligneTrouvee = true;
+                    trueLine = true;
                     break;
                 }
             }
         }
         // Affiche ou cache la ligne selon la valeur du booléen
-        lignes[i].style.display = ligneTrouvee ? "" : "none";
+        rows[i].style.display = trueLine ? "" : "none";
     }
     }
 
