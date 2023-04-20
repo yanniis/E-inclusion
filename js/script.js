@@ -37,27 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function recherche() {
-        const saisie = document.getElementById("searchInput").value.toUpperCase();
-        const table = document.getElementById("table");
-        const lignes = table.getElementsByTagName("tr");
-      
-        for (let i = 1; i < lignes.length; i++) {
-          const cellules = lignes[i].getElementsByTagName("td");
-          let ligneTrouvee = false;
-          for (let j = 0; j < cellules.length; j++) {
+function recherche() {
+    // Sélectionne les éléments HTML 
+    const saisie = document.getElementById("searchInput").value.toUpperCase();
+    const table = document.getElementById("table");
+    const lignes = table.getElementsByTagName("tr");
+    // Boucle à travers chaque ligne du tableau à partir de la deuxième ligne pour ne pas supprimer l'en-tête 
+    for (let i = 1; i < lignes.length; i++) {
+        // Sélectionne toutes les cellules de la ligne actuelle
+        const cellules = lignes[i].getElementsByTagName("td");
+        // Initialise le booléen pour indiquer l'état de la ligne
+        let ligneTrouvee = false;
+        // Boucle à travers chaque cellule de la ligne actuelle
+        for (let j = 0; j < cellules.length; j++) {
+            // Sélectionne la cellule actuelle
             const cellule = cellules[j];
             if (cellule) {
-              const contenu = cellule.textContent.toUpperCase();
-              if (contenu.includes(saisie)) {
-                ligneTrouvee = true;
-                break;
-              }
+                // Récupère le contenu textuel de la cellule en majuscules pour la comparaison
+                const contenu = cellule.textContent.toUpperCase();
+                // Vérifie si la saisie 
+                if (contenu.includes(saisie)) {
+                    // true = affichage
+                    ligneTrouvee = true;
+                    break;
+                }
             }
-          }
-          lignes[i].style.display = ligneTrouvee ? "" : "none";
         }
-      }
+        // Affiche ou cache la ligne selon la valeur du booléen
+        lignes[i].style.display = ligneTrouvee ? "" : "none";
+    }
+    }
 
 
     function ajouterElement() {
