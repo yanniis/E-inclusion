@@ -37,6 +37,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function recherche() {
+        const saisie = document.getElementById("searchInput").value.toUpperCase();
+        const table = document.getElementById("table");
+        const lignes = table.getElementsByTagName("tr");
+      
+        for (let i = 1; i < lignes.length; i++) {
+          const cellules = lignes[i].getElementsByTagName("td");
+          let ligneTrouvee = false;
+          for (let j = 0; j < cellules.length; j++) {
+            const cellule = cellules[j];
+            if (cellule) {
+              const contenu = cellule.textContent.toUpperCase();
+              if (contenu.includes(saisie)) {
+                ligneTrouvee = true;
+                break;
+              }
+            }
+          }
+          lignes[i].style.display = ligneTrouvee ? "" : "none";
+        }
+      }
+
+
     function ajouterElement() {
 
         const id = document.getElementById("id").value; 
