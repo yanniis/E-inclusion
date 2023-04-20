@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tableau Dynamique avec Format d'Heure Personnalisé</title>
+</head>
+<body>
+
+
+<table id="table">
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Date de Naissance</th>
+  </tr>
+</table>
+
+
+<form id="form">
+  <input type="text" id="idInput" placeholder="ID">
+  <input type="text" id="nomInput" placeholder="Nom">
+  <input type="text" id="prenomInput" placeholder="Prénom">
+  <input type="date" id="dateInput" placeholder="Date de Naissance">
+  <button type="button" onclick="ajouterLigne()">Ajouter une ligne</button>
+</form>
+
+<script>
+
+function ajouterLigne() {
+
+  var id = document.getElementById("idInput").value;
+  var nom = document.getElementById("nomInput").value;
+  var prenom = document.getElementById("prenomInput").value;
+  var date = document.getElementById("dateInput").value;
+
+
+  var table = document.getElementById("table");
+  var newRow = table.insertRow();
+
+
+  var cell1 = newRow.insertCell();
+  var cell2 = newRow.insertCell();
+  var cell3 = newRow.insertCell();
+  var cell4 = newRow.insertCell();
+
+
+  cell1.innerHTML = id;
+  cell2.innerHTML = nom;
+  cell3.innerHTML = prenom;
+  
+  // Convertir la date au format "dd/mm/yyyy"
+  var dateObj = new Date(date);
+  var jour = String(dateObj.getDate()).padStart(2, '0');
+  var mois = String(dateObj.getMonth() + 1).padStart(2, '0');
+  var annee = dateObj.getFullYear();
+  var dateFormatted = jour + '/' + mois + '/' + annee;
+  
+  cell4.innerHTML = dateFormatted;
+  
+
+  document.getElementById("idInput").value = "";
+  document.getElementById("nomInput").value = "";
+  document.getElementById("prenomInput").value = "";
+  document.getElementById("dateInput").value = "";
+}
+</script>
+
+</body>
+</html>
