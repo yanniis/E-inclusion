@@ -38,11 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 function recherche() {
-    // Sélectionne les éléments HTML 
     const input = document.getElementById("searchInput").value.toUpperCase();
     const table = document.getElementById("table");
     const rows = table.getElementsByTagName("tr");
-    // Boucle à travers chaque ligne du tableau à partir de la deuxième ligne pour ne pas supprimer l'en-tête 
+    // Départ sur la deuxième ligne pour ne pas supprimer l'en-tête 
     for (let i = 1; i < rows.length; i++) {
         // Sélectionne toutes les cells de la ligne actuelle
         const cells = rows[i].getElementsByTagName("td");
@@ -53,9 +52,7 @@ function recherche() {
             // Sélectionne la cellule actuelle
             const cell = cells[j];
             if (cell) {
-                // Récupère le contenu textuel de la cellule en majuscules pour la comparaison
                 const contenu = cell.textContent.toUpperCase();
-                // Vérifie si la saisie 
                 if (contenu.includes(input)) {
                     // true = affichage
                     trueLine = true;
@@ -129,7 +126,6 @@ function recherche() {
     }
 
 
-    window.onload = () => { 
     // Données tableau
     var data = [
         { id: "EGP_0001", ipp: "8000000", nom: "HORSH", prenom: "August", ddn: "10/02/1988" },
@@ -141,13 +137,14 @@ function recherche() {
         { id: "EGP_0007", ipp: "8673200", nom: "FERRARI", prenom: "Enzo", ddn: "12/11/1959" },
         { id: "EGP_0008", ipp: "8010205", nom: "LAMBO", prenom: "Ferruccio", ddn: "24/10/1987" },
         { id: "EGP_0009", ipp: "", nom: "WILKS", prenom: "Maurice", ddn: "31/01/1994" },
-        { id: "EGP_0010", ipp: "8472949", nom: "WIKS", prenom: "Spencer", ddn: "19/03/1986" }
+        { id: "EGP_0010", ipp: "8472949", nom: "WILKS", prenom: "Spencer", ddn: "19/03/1986" }
 
     ];
 
+    window.onload = () => { 
     // Tableau dynamique
     const table = document.getElementById("table");
-    const id = document.getElementById("id"); 
+
   
     for (let i = 0; i < data.length; i++) {
         const row = table.insertRow(i + 1);
