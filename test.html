@@ -1,69 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tableau Dynamique avec Format d'Heure Personnalisé</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tri de tableau avec des boutons</title>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
 
+    <button onclick="sortById()">Trier par ID</button>
+    <button onclick="sortByName()">Trier par nom</button>
+    <button onclick="sortByFirstName()">Trier par prénom</button>
 
-<table id="table">
-  <tr>
-    <th>ID</th>
-    <th>Nom</th>
-    <th>Prénom</th>
-    <th>Date de Naissance</th>
-  </tr>
-</table>
+    <script>
+      // Données tableau
+      const data = [
+        { id: "EGP_0001", nom: "BUGATTI", prenom: "Emil" },
+        { id: "EGP_0002", nom: "JELLINEK", prenom: "August" }
+      ];
 
+      const tableBody = document.getElementById("table-body");
 
-<form id="form">
-  <input type="text" id="idInput" placeholder="ID">
-  <input type="text" id="nomInput" placeholder="Nom">
-  <input type="text" id="prenomInput" placeholder="Prénom">
-  <input type="date" id="dateInput" placeholder="Date de Naissance">
-  <button type="button" onclick="ajouterLigne()">Ajouter une ligne</button>
-</form>
+      function renderTable() {
+        tableBody.innerHTML = "";
+        data.forEach((patient) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${patient.id}</td><td>${patient.nom}</td><td>${patient.prenom}</td>`;
+          tableBody.appendChild(tr);
+        });
+      }
 
-<script>
+      function sortById() {
+        data.sort((a, b) => a.id.localeCompare(b.id));
+        renderTable();
+      }
 
-function ajouterLigne() {
+      function sortByName() {
+        data.sort((a, b) => a.nom.localeCompare(b.nom));
+        renderTable();
+      }
 
-  var id = document.getElementById("idInput").value;
-  var nom = document.getElementById("nomInput").value;
-  var prenom = document.getElementById("prenomInput").value;
-  var date = document.getElementById("dateInput").value;
+      function sortByFirstName() {
+        data.sort((a, b) => a.prenom.localeCompare(b.prenom));
+        renderTable();
+      }
 
-
-  var table = document.getElementById("table");
-  var newRow = table.insertRow();
-
-
-  var cell1 = newRow.insertCell();
-  var cell2 = newRow.insertCell();
-  var cell3 = newRow.insertCell();
-  var cell4 = newRow.insertCell();
-
-
-  cell1.innerHTML = id;
-  cell2.innerHTML = nom;
-  cell3.innerHTML = prenom;
-  
-  // Convertir la date au format "dd/mm/yyyy"
-  var dateObj = new Date(date);
-  var jour = String(dateObj.getDate()).padStart(2, '0');
-  var mois = String(dateObj.getMonth() + 1).padStart(2, '0');
-  var annee = dateObj.getFullYear();
-  var dateFormatted = jour + '/' + mois + '/' + annee;
-  
-  cell4.innerHTML = dateFormatted;
-  
-
-  document.getElementById("idInput").value = "";
-  document.getElementById("nomInput").value = "";
-  document.getElementById("prenomInput").value = "";
-  document.getElementById("dateInput").value = "";
-}
-</script>
-
-</body>
+      // Initialisation
+      renderTable();
+    </script>
+  </body>
 </html>
