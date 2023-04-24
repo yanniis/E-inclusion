@@ -1,60 +1,87 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Tri de tableau avec des boutons</title>
-  </head>
-  <body>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-        </tr>
-      </thead>
-      <tbody id="table-body"></tbody>
-    </table>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <table id="fruits-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>EGP_0001</td>
+        <td>1,00€</td>
+      </tr>
+      <tr>
+        <td>EGP_13</td>
+        <td>0,75€</td>
+      </tr>
+      <tr>
+        <td>EGP_10</td>
+        <td>2,50€</td>
+      </tr>
+      <tr>
+        <td>EGP_10</td>
+        <td>3,15€</td>
+      </tr>
+      <tr>
+        <td>EGP_10</td>
+        <td>2,10€</td>
+      </tr>
+      <tr>
+        <td>EGP_10</td>
+        <td>1,76€</td>
+      </tr>
+      <tr>
+        <td>EGP_10</td>
+        <td>0,80€</td>
+      </tr>
+  </table>
+  
+  <button id="sort-name">Trier par nom</button>
+  <button id="sort-price">Trier par Prix</button>
 
-    <button onclick="sortById()">Trier par ID</button>
-    <button onclick="sortByName()">Trier par nom</button>
-    <button onclick="sortByFirstName()">Trier par prénom</button>
+  <script>
+    //variables
+    const table = document.getElementById("fruits-table");
+    const button1 = document.getElementById("sort-name");
+    const button2 = document.getElementById("sort-price");
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
 
-    <script>
-      // Données tableau
-      const data = [
-        { id: "EGP_0001", nom: "BUGATTI", prenom: "Emil" },
-        { id: "EGP_0002", nom: "JELLINEK", prenom: "August" }
-      ];
+    //evenement au clic de la souris qui déclenche la fonction 
+    button1.addEventListener("click", function() {
+      rows.sort(function(row1, row2) {
+        const name1 = row1.querySelector("td:first-child").textContent.trim().toLowerCase();
+        const name2 = row2.querySelector("td:first-child").textContent.trim().toLowerCase();
+        if (name1 < name2) return -1;
+        if (name1 > name2) return 1;
+        return 0;
+      });
+      rows.forEach(function(row) {
+        table.querySelector("tbody").appendChild(row);
+      });
+    });
 
-      const tableBody = document.getElementById("table-body");
-
-      function renderTable() {
-        tableBody.innerHTML = "";
-        data.forEach((patient) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `<td>${patient.id}</td><td>${patient.nom}</td><td>${patient.prenom}</td>`;
-          tableBody.appendChild(tr);
+      button2.addEventListener("click", function() {
+        rows.sort(function(row1, row2) {
+          //nth-child permet de sélectionner le second enfant du tableau 
+          const price1 = row1.querySelector("td:nth-child(2)").textContent.trim();
+          const price2 = row2.querySelector("td:nth-child(2)").textContent.trim();
+          if (price1 < price2) return -1;
+          if (price1 > price2) return 1;
+          return 0;
         });
-      }
-
-      function sortById() {
-        data.sort((a, b) => a.id.localeCompare(b.id));
-        renderTable();
-      }
-
-      function sortByName() {
-        data.sort((a, b) => a.nom.localeCompare(b.nom));
-        renderTable();
-      }
-
-      function sortByFirstName() {
-        data.sort((a, b) => a.prenom.localeCompare(b.prenom));
-        renderTable();
-      }
-
-      // Initialisation
-      renderTable();
-    </script>
+      rows.forEach(function(row) {
+        table.querySelector("tbody").appendChild(row);
+      });
+      });
+  </script>
   </body>
 </html>

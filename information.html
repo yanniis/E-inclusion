@@ -80,14 +80,61 @@
                 </form>
             </tr>
         </table>
-
-
-
+<!--
+        <button id="sort-name">Trier par nom</button>
+        <button id="sort-price">Trier par Prix</button>
+-->
 </main>
     
 <footer>
 </footer>
+<!--
+<script>
 
+    document.addEventListener('DOMContentLoaded', function() {
+     // Code pour trier le tableau
 
+ const table = document.getElementById("table");
+ const button1 = document.getElementById("sort-name");
+ const button2 = document.getElementById("sort-price");
+ const rows = Array.from(table.querySelectorAll("tbody tr"));
+ const tds = table.querySelectorAll("td");
+console.log(tds);
+ 
+ 
+ //evenement au clic de la souris qui déclenche la fonction 
+ button1.addEventListener("click", function() {
+   rows.sort(function(row1, row2) {
+     const name1 = row1.querySelector("td:first-child").textContent.trim().toLowerCase();
+     const name2 = row2.querySelector("td:first-child").textContent.trim().toLowerCase();
+     if (name1 < name2) return -1;
+     if (name1 > name2) return 1;
+     return 0;
+   });
+
+   rows.forEach(function(row) {
+     table.querySelector("tbody").appendChild(row);
+   });
+ });
+
+   button2.addEventListener("click", function() {
+     rows.sort(function(row1, row2) {
+       //nth-child permet de sélectionner le second enfant du tableau 
+       const price1 = row1.querySelector("td:nth-child(2)").textContent.trim();
+       const price2 = row2.querySelector("td:nth-child(2)").textContent.trim();
+       if (price1 < price2) return -1;
+       if (price1 > price2) return 1;
+       return 0;
+     });
+   rows.forEach(function(row) {
+     table.querySelector("tbody").appendChild(row);
+   });
+   });
+   
+});
+
+   
+</script>
+-->
 </body>
 </html>

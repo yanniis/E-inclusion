@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function confirmerSuppression(id) {
-        const deleteElement = document.getElementById(id);
-        const name = deleteElement.cells[2].innerHTML;
-        const firstName = deleteElement.cells[3].innerHTML;
+        const element = document.getElementById(id);
+        const name = element.cells[2].innerHTML;
+        const firstName = element.cells[3].innerHTML;
     
         if (confirm("Voulez-vous vraiment supprimer l'élément " + firstName + " " + name + " ?")) {
             // Supprimer l'élément du tableau HTML
-            deleteElement.parentNode.removeChild(deleteElement);
+            element.parentNode.removeChild(element);
         }
     }
 
@@ -125,23 +125,23 @@ function recherche() {
         return false; 
     }
 
-
-    // Données tableau
-    var data = [
-        { id: "EGP_0001", ipp: "8000000", nom: "HORSH", prenom: "August", ddn: "10/02/1988" },
-        { id: "EGP_0002", ipp: "", nom: "JELLINEK", prenom: "Emil", ddn: "23/02/1999" },
-        { id: "EGP_0003", ipp: "", nom: "FRITZ", prenom: "Max", ddn: "01/09/1998" },
-        { id: "EGP_0004", ipp: "8002300", nom: "KITA", prenom: "Kenji", ddn: "30/04/1967" },
-        { id: "EGP_0005", ipp: "8067400", nom: "PORSCHE", prenom: "Ferdinand", ddn: "27/06/1978" },
-        { id: "EGP_0006", ipp: "", nom: "BUGATTI", prenom: "Ettore", ddn: "09/09/1989" },
-        { id: "EGP_0007", ipp: "8673200", nom: "FERRARI", prenom: "Enzo", ddn: "12/11/1959" },
-        { id: "EGP_0008", ipp: "8010205", nom: "LAMBO", prenom: "Ferruccio", ddn: "24/10/1987" },
-        { id: "EGP_0009", ipp: "", nom: "WILKS", prenom: "Maurice", ddn: "31/01/1994" },
-        { id: "EGP_0010", ipp: "8472949", nom: "WILKS", prenom: "Spencer", ddn: "19/03/1986" }
-
-    ];
-
-    window.onload = () => { 
+        
+            // Données tableau
+            var data = [
+                { id: "EGP_0001", ipp: "8000000", nom: "HORSH", prenom: "August", ddn: "10/02/1988" },
+                { id: "EGP_0002", ipp: "", nom: "JELLINEK", prenom: "Emil", ddn: "23/02/1999" },
+                { id: "EGP_0003", ipp: "", nom: "FRITZ", prenom: "Max", ddn: "01/09/1998" },
+                { id: "EGP_0004", ipp: "8002300", nom: "KITA", prenom: "Kenji", ddn: "30/04/1967" },
+                { id: "EGP_0005", ipp: "8067400", nom: "PORSCHE", prenom: "Ferdinand", ddn: "27/06/1978" },
+                { id: "EGP_0006", ipp: "", nom: "BUGATTI", prenom: "Ettore", ddn: "09/09/1989" },
+                { id: "EGP_0007", ipp: "8673200", nom: "FERRARI", prenom: "Enzo", ddn: "12/11/1959" },
+                { id: "EGP_0008", ipp: "8010205", nom: "LAMBO", prenom: "Ferruccio", ddn: "24/10/1987" },
+                { id: "EGP_0009", ipp: "", nom: "WILKS", prenom: "Maurice", ddn: "31/01/1994" },
+                { id: "EGP_0010", ipp: "8472949", nom: "WILKS", prenom: "Spencer", ddn: "19/03/1986" }
+        
+            ];
+        
+    window.onload = () => {
     // Tableau dynamique
     const table = document.getElementById("table");
 
@@ -176,3 +176,4 @@ function recherche() {
         cell6.className ="suppr";
     }
     };
+
