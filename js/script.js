@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), fileName);
     }
 
+    // Fonction supprimer pour ligne ajoutée
     function confirmerSuppression(id) {
         const element = document.getElementById(id);
         const name = element.cells[2].innerHTML;
@@ -125,7 +126,10 @@ function recherche() {
         return false; 
     }
 
-        
+
+    window.onload = () => {
+
+                
             // Données tableau
             var data = [
                 { id: "EGP_0001", ipp: "8000000", nom: "HORSH", prenom: "August", ddn: "10/02/1988" },
@@ -141,9 +145,13 @@ function recherche() {
         
             ];
         
-    window.onload = () => {
     // Tableau dynamique
     const table = document.getElementById("table");
+    const button1 = document.getElementById("sort-id");
+    const button2 = document.getElementById("sort-ipp");
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
+    const tds = table.querySelectorAll("td");
+   console.log(tds);
 
   
     for (let i = 0; i < data.length; i++) {
@@ -155,6 +163,7 @@ function recherche() {
         const cell5 = row.insertCell(4);
         const cell6 = row.insertCell(5);
 
+        // Fonction supprimer pour cellule déjà présente
         const bouton = document.createElement("button");
         bouton.innerHTML = "Supprimer";
         bouton.onclick = function() {
@@ -164,7 +173,6 @@ function recherche() {
                 this.parentNode.parentNode.remove();
                 }
         };
-        
         cell1.innerHTML = data[i].id;
         cell2.innerHTML = data[i].ipp;
         cell3.innerHTML = data[i].nom;
@@ -174,6 +182,38 @@ function recherche() {
         cell5.innerHTML = data[i].ddn;
         cell6.appendChild(bouton);
         cell6.className ="suppr";
-    }
+ 
+ 
+ // Evenement au clic de la souris qui déclenche la fonction 
+ button1.addEventListener("click", function() {
+   rows.sort(function(row1, row2) {
+     const name1 = row1.querySelector("td:first-child").textContent.trim().toLowerCase();
+     const name2 = row2.querySelector("td:first-child").textContent.trim().toLowerCase();
+     if (name1 < name2) return -1;
+     if (name1 > name2) return 1;
+     return 0;
+   });
+
+   rows.forEach(function(row) {
+     table.querySelector("tbody").appendChild(row);
+   });
+ });
+
+   button2.addEventListener("click", function() {
+     rows.sort(function(row1, row2) {
+       //nth-child permet de sélectionner le second enfant du tableau 
+       const price1 = row1.querySelector("td:nth-child(2)").textContent.trim();
+       const price2 = row2.querySelector("td:nth-child(2)").textContent.trim();
+       if (price1 < price2) return -1;
+       if (price1 > price2) return 1;
+       return 0;
+     });
+   rows.forEach(function(row) {
+     table.querySelector("tbody").appendChild(row);
+   });
+   });
+   
+};
+    
     };
 
